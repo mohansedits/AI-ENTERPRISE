@@ -3,56 +3,1212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Work Automation | For Influencers & Industries</title>
+    <title>AI Services Agency | 3D AI Solutions</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f23;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 3D Particle Background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        /* 3D Globe Background */
+        .globe-container {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            z-index: -1;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+        @media (max-width: 768px) {
+            .globe-container { width: 250px; height: 250px; opacity: 0.15; }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(15, 15, 35, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 30px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+            transition: transform 0.2s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: translateZ(20px);
+        }
+
+        .hero h1 span {
+            color: #ffd700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background: #ffd700;
+            color: #333;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            transform-style: preserve-3d;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 30px -10px rgba(255, 215, 0, 0.5);
+        }
+
+        .services, .pricing, .demo, .contact {
+            padding: 60px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: #667eea;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* 3D Card Styles */
+        .service-card, .case-card, .price-card {
+            background: linear-gradient(135deg, #1a1a3a, #16213e);
+            padding: 25px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-card.visible, .case-card.visible, .price-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover, .case-card:hover, .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 40px -15px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .service-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .service-card p {
+            color: #ccc;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .service-card small {
+            color: #667eea;
+            font-size: 0.8rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .price-card {
+            text-align: center;
+        }
+
+        .price-card.featured {
+            border: 2px solid #ffd700;
+            transform: scale(1.02);
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .price-card .price {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .price-card .price span {
+            font-size: 1rem;
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .price-card li {
+            padding: 8px 0;
+            color: #ccc;
+        }
+
+        .demo input, .demo select, .contact input, .contact select, .contact textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background: #1a1a3a;
+            color: #fff;
+        }
+
+        /* 3D Button Styles */
+        .demo button, .contact button, .chat-send, .testimonial-container button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .demo button:hover, .contact button:hover, .chat-send:hover, .testimonial-container button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 30px -10px rgba(102, 126, 234, 0.5);
+        }
+
+        .demo-output {
+            margin-top: 20px;
+            padding: 20px;
+            background: #1a1a3a;
+            border-radius: 10px;
+            white-space: pre-wrap;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #0a0a1a;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background: #1a1a2e;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        /* Floating CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 101;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 101;
+            font-size: 20px;
+        }
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 80px;
+            background: #25D366;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            z-index: 101;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            animation: whatsappPulse 1.5s infinite;
+        }
+        @keyframes whatsappPulse {
+            0% { transform: scale(1); box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3); }
+            50% { transform: scale(1.1); box-shadow: 0 5px 30px rgba(37, 211, 102, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3); }
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 150px;
+            z-index: 1001;
+        }
+        .chat-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            font-size: 24px;
+        }
+        .chat-popup {
+            position: fixed;
+            bottom: 85px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1001;
+        }
+        body.dark-mode .chat-popup {
+            background: #1a1a3a;
+        }
+        .chat-popup.active {
+            display: block;
+        }
+        .chat-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            color: white;
+            font-weight: bold;
+        }
+        .chat-body {
+            padding: 15px;
+        }
+        .chat-body input, .chat-body textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .faq-item {
+            background: linear-gradient(135deg, #1a1a3a, #16213e);
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #2d2d5e;
+            transition: transform 0.3s;
+        }
+        .faq-item:hover {
+            transform: translateX(5px);
+        }
+        .faq-question {
+            padding: 18px 25px;
+            cursor: pointer;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 1.1rem;
+        }
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #ccc;
+        }
+        .faq-item.active .faq-answer {
+            padding: 20px 25px;
+            max-height: 200px;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            text-align: center;
+            padding: 40px;
+            background: #667eea;
+            color: white;
+            border-radius: 15px;
+            margin: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .newsletter input {
+            padding: 12px;
+            width: 250px;
+            border: none;
+            border-radius: 25px;
+            margin: 10px;
+        }
+        .newsletter button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        /* Recent Projects */
+        .case-studies {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0f0f23, #1a1a3a);
+            position: relative;
+            z-index: 1;
+        }
+        .case-studies h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .case-card {
+            background: linear-gradient(135deg, #1a1a3a, #16213e);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        .case-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+        .case-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        .case-card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .tech-used {
+            display: inline-block;
+            padding: 6px 15px;
+            background: rgba(102, 126, 234, 0.15);
+            color: #667eea;
+            border-radius: 25px;
+            font-size: 12px;
+        }
+
+        /* Calculator */
+        .calculator {
+            padding: 60px 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .calc-container {
+            background: linear-gradient(135deg, #1a1a3a, #16213e);
+            padding: 30px;
+            border-radius: 20px;
+        }
+        .calc-field {
+            margin: 20px 0;
+        }
+        .calc-field label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .calc-field select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            background: white;
+            border: none;
+        }
+        .calc-result {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #667eea20;
+            border-radius: 10px;
+        }
+        .calc-result span {
+            color: #28a745;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Testimonial Form */
+        .testimonial-form {
+            max-width: 550px;
+            margin: 60px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .testimonial-container {
+            background: linear-gradient(135deg, #1a1a3a, #16213e);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        .testimonial-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .testimonial-container h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .review-input-group input,
+        .review-input-group select,
+        .review-input-group textarea {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: 2px solid #333;
+            background: #0f0f23;
+            color: white;
+            font-size: 1rem;
+        }
+        .rating-select label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            z-index: 1001;
+            animation: slideIn 0.5s ease;
+            display: none;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Email Popup */
+        .email-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup-content {
+            background: #1a1a3a;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 400px;
+            text-align: center;
+        }
+        .popup-content span {
+            font-size: 24px;
+            cursor: pointer;
+            float: right;
+            color: white;
+        }
+        .popup-content h3 {
+            color: white;
+        }
+        .popup-content p {
+            color: #ccc;
+        }
+        .popup-content input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: #0f0f23;
+            color: white;
+        }
+        .popup-content button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .nav-links a {
+                margin: 0 10px;
+                font-size: 14px;
+            }
+            .services, .pricing, .demo, .contact {
+                padding: 30px 20px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>🤖 AI Work Automation</h1>
-        <p>For Influencers & Industries — Save 10+ Hours/Week</p>
+
+    <!-- 3D Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- 3D Globe Background -->
+    <div class="globe-container"></div>
+
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+
+    <!-- Floating CTA -->
+    <a href="#contact" class="floating-cta">📞 Free Consultation →</a>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" onclick="scrollToTop()">↑</div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/YOUR_NUMBER?text=Hi!%20I%20need%20an%20AI%20solution" target="_blank" class="whatsapp-btn">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.032 2.5C6.09 2.5 1.282 7.308 1.282 13.25c0 2.188.678 4.22 1.83 5.917L1.938 21.5l2.586-.746c1.62.998 3.515 1.496 5.508 1.496 5.942 0 10.75-4.808 10.75-10.75S17.974 2.5 12.032 2.5zm0 19.5c-1.9 0-3.714-.523-5.28-1.488l-.378-.23-1.875.54.543-1.833-.25-.39a9.05 9.05 0 0 1-1.49-4.85c0-4.99 4.06-9.05 9.05-9.05 4.99 0 9.05 4.06 9.05 9.05 0 4.99-4.06 9.05-9.05 9.05zm4.96-6.77c-.27-.135-1.59-.785-1.84-.875-.25-.09-.43-.135-.61.135-.18.27-.7.875-.86 1.055-.16.18-.32.203-.59.068-.27-.135-1.14-.42-2.17-1.34-.8-.72-1.34-1.61-1.5-1.88-.16-.27-.02-.416.12-.55.12-.12.27-.32.41-.48.13-.16.18-.27.27-.45.09-.18.045-.34-.023-.48-.067-.14-.61-1.47-.84-2.01-.22-.52-.45-.45-.61-.46-.16-.01-.34-.01-.52-.01-.18 0-.47.067-.72.34-.25.27-.95.93-.95 2.27 0 1.34.97 2.63 1.11 2.81.14.18 1.91 2.92 4.63 4.09 2.72 1.17 2.72.78 3.21.73.49-.05 1.59-.65 1.81-1.28.22-.63.22-1.17.16-1.28-.06-.11-.22-.18-.49-.32z"/>
+        </svg>
+    </a>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">🚀 AI Services Agency</div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#demo">Demo</a>
+            <a href="#contact">Contact</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="blog-generator.html">📝 Blog Generator</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>AI Solutions for <span>Your Business</span></h1>
+        <p>Chatbots • Automation • Websites • Content • Voice • And more</p>
+        <a href="#contact" class="btn-primary">Get Free Consultation →</a>
     </header>
 
-    <main>
-        <section class="demo">
-            <h2>🎬 Try It Now — Free</h2>
-            <p>Paste any YouTube/TikTok link or describe your content:</p>
-            
-            <textarea id="inputText" placeholder="Example: A travel vlog about visiting Bali, swimming with turtles, and trying local food..." rows="4"></textarea>
-            
-            <button id="generateBtn">✨ Generate Captions + Hashtags</button>
-            <div id="loading" style="display:none;">🤖 AI is working...</div>
-        </section>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>🚀 AI Services We Provide</h2>
+        <div class="services-grid">
+            <div class="service-card"><div class="icon">💬</div><h3>AI Chatbot Development</h3><p>Custom chatbots for businesses, schools, websites & customer support</p><small>OpenAI • Google Cloud</small></div>
+            <div class="service-card"><div class="icon">🌐</div><h3>AI Website Creation</h3><p>Portfolios, business sites, AI landing pages, SaaS dashboards</p><small>Vercel • GitHub Pages</small></div>
+            <div class="service-card"><div class="icon">⚡</div><h3>AI Automation Services</h3><p>Emails, WhatsApp replies, customer support, data entry, scheduling</p><small>Zapier • Make.com</small></div>
+            <div class="service-card"><div class="icon">📄</div><h3>Resume & Portfolio Generation</h3><p>ATS resumes, AI portfolio websites, LinkedIn optimization</p><small>AI-powered</small></div>
+            <div class="service-card"><div class="icon">🎨</div><h3>AI Image & Design</h3><p>Posters, thumbnails, logos, social media graphics, AI avatars</p><small>Canva • Adobe AI</small></div>
+            <div class="service-card"><div class="icon">📱</div><h3>Social Media AI Content</h3><p>Instagram captions, YouTube scripts, video ideas, marketing posts</p><small>Content automation</small></div>
+            <div class="service-card"><div class="icon">💻</div><h3>AI Coding Solutions</h3><p>Websites, bots, dashboards, management systems</p><small>Custom development</small></div>
+            <div class="service-card"><div class="icon">🎙️</div><h3>AI Voice Services</h3><p>AI voiceovers, text-to-speech, dubbing, AI call assistants</p><small>Voice AI</small></div>
+            <div class="service-card"><div class="icon">📚</div><h3>AI Tools for Students</h3><p>Homework assistant, notes summarizer, quiz generator, coding helper</p><small>Educational AI</small></div>
+            <div class="service-card"><div class="icon">🏢</div><h3>AI Agency Model</h3><p>Monthly AI solutions for clients: websites + automation + chatbots</p><small>Subscription-based</small></div>
+        </div>
+    </section>
 
-        <section class="output" id="outputSection" style="display:none;">
-            <h3>📱 Your Instagram Captions:</h3>
-            <div id="captions"></div>
-            
-            <h3>🏷️ Hashtags:</h3>
-            <div id="hashtags"></div>
-            
-            <button id="copyBtn">📋 Copy All</button>
-        </section>
+    <!-- Recent Projects -->
+    <section class="case-studies">
+        <h2>📁 Recent Projects</h2>
+        <div class="case-grid">
+            <div class="case-card">
+                <div class="case-icon">🤖</div>
+                <h3>E-commerce Chatbot</h3>
+                <p>24/7 customer support for online store. Reduced response time by 90%.</p>
+                <span class="tech-used">OpenAI • WhatsApp API</span>
+            </div>
+            <div class="case-card">
+                <div class="case-icon">📝</div>
+                <h3>Blog Title Generator</h3>
+                <p>AI tool that generates 50+ blog titles in 1 click. Used by 100+ bloggers.</p>
+                <span class="tech-used">OpenAI • JavaScript</span>
+            </div>
+            <div class="case-card">
+                <div class="case-icon">⚡</div>
+                <h3>Social Media Automation</h3>
+                <p>Auto-post content across 5 platforms saving 20+ hours/week.</p>
+                <span class="tech-used">Zapier • Make.com</span>
+            </div>
+        </div>
+    </section>
 
-        <section class="pricing">
-            <h2>💰 Simple Pricing</h2>
-            <div class="price-card">
-                <h3>Free</h3>
-                <p>$0/month</p>
-                <p>50 generations</p>
-            </div>
-            <div class="price-card">
-                <h3>Pro</h3>
-                <p>$19/month</p>
-                <p>500 generations</p>
-            </div>
-            <div class="price-card">
-                <h3>Unlimited</h3>
-                <p>$99/month</p>
-                <p>Unlimited + priority</p>
-            </div>
-        </section>
-    </main>
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <h2>💰 Simple Pricing Models</h2>
+        <div class="pricing-grid">
+            <div class="price-card"><h3>Project Based</h3><div class="price">$500 - $5000</div><p>One-time payment for complete delivery</p><ul><li>✓ Custom AI solution</li><li>✓ 30 days support</li><li>✓ Source code included</li></ul></div>
+            <div class="price-card featured"><h3>Monthly Subscription</h3><div class="price">$299 - $999<span>/month</span></div><p>Ongoing AI services & support</p><ul><li>✓ Everything in Project</li><li>✓ Unlimited revisions</li><li>✓ 24/7 support</li><li>✓ Monthly new features</li></ul></div>
+            <div class="price-card"><h3>Freelance / Hourly</h3><div class="price">$50 - $150<span>/hour</span></div><p>Pay as you go for specific tasks</p><ul><li>✓ Flexible scope</li><li>✓ Quick turnaround</li><li>✓ No commitment</li></ul></div>
+        </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- Pricing Calculator -->
+    <section class="calculator">
+        <h2>💰 Project Cost Calculator</h2>
+        <div class="calc-container">
+            <div class="calc-field">
+                <label>Service Type:</label>
+                <select id="calcService">
+                    <option value="300">AI Chatbot - $300</option>
+                    <option value="150">Blog Generator - $150</option>
+                    <option value="500">AI Website - $500</option>
+                    <option value="250">Automation - $250</option>
+                </select>
+            </div>
+            <div class="calc-field">
+                <label>Complexity:</label>
+                <select id="calcComplexity">
+                    <option value="1">Basic (x1)</option>
+                    <option value="1.5">Standard (x1.5)</option>
+                    <option value="2">Advanced (x2)</option>
+                </select>
+            </div>
+            <div class="calc-field">
+                <label>Urgent Delivery:</label>
+                <select id="calcUrgent">
+                    <option value="1">Normal (7-14 days)</option>
+                    <option value="1.3">Urgent (+30%)</option>
+                </select>
+            </div>
+            <div class="calc-result">
+                <h3>Estimated Price: <span id="calcPrice">$0</span></h3>
+                <p>*Final price may vary after consultation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live AI Demo -->
+    <section id="demo" class="demo">
+        <h2>🎯 Live AI Demo</h2>
+        <p>Try our AI content generator — free, no signup required</p>
+        
+        <select id="demoType">
+            <option value="captions">Instagram Captions</option>
+            <option value="script">YouTube Script</option>
+            <option value="ideas">Video Ideas</option>
+        </select>
+        
+        <input type="text" id="demoInput" placeholder="Describe your topic... (e.g., fitness tips for beginners)">
+        <button id="runDemo">Generate with AI →</button>
+        
+        <div id="demoOutput" class="demo-output"></div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="blog-generator.html" style="background: #28a745; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; display: inline-block;">
+                📝 Try Our Blog Title Generator →
+            </a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <h2>❓ Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">▶ How long does a chatbot take to build?</div>
+                <div class="faq-answer">Most chatbots are ready in 3-5 days, depending on complexity.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">▶ Do you offer support after delivery?</div>
+                <div class="faq-answer">Yes, 30 days free support included. Ongoing support plans available.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">▶ Can I see examples of your work?</div>
+                <div class="faq-answer">Check my portfolio page for live demos and case studies.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">▶ What payment methods do you accept?</div>
+                <div class="faq-answer">Stripe, PayPal, Bank Transfer, and Crypto (USDT).</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>📞 Get a Free Consultation</h2>
+        <p>Tell us what you need — we'll respond within 24 hours</p>
+        
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Your name" required>
+            <input type="email" id="email" placeholder="Your email" required>
+            <select id="service">
+                <option value="">Select a service</option>
+                <option>AI Chatbot</option>
+                <option>AI Website</option>
+                <option>AI Automation</option>
+                <option>Resume/Portfolio</option>
+                <option>AI Design</option>
+                <option>Social Media AI</option>
+                <option>AI Coding</option>
+                <option>AI Voice</option>
+                <option>Student Tools</option>
+                <option>Agency Model</option>
+            </select>
+            <textarea id="message" placeholder="Tell us about your project..." rows="4"></textarea>
+            <button type="submit">Send Message →</button>
+        </form>
+        <div id="formStatus"></div>
+
+        <div style="margin-top: 40px;">
+            <h3>🔧 Don't see what you need?</h3>
+            <textarea id="customRequest" rows="2" placeholder="Describe the AI tool you want us to build..." style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid #ddd; background: #1a1a3a; color: white;"></textarea>
+            <button onclick="submitRequest()" style="background: #667eea; color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer;">Submit Custom Request →</button>
+        </div>
+    </section>
+
+    <!-- Leave a Review -->
+    <section class="testimonial-form">
+        <div class="testimonial-container">
+            <div class="testimonial-icon">⭐</div>
+            <h3>Leave a Review</h3>
+            <p>Had a great experience? Let us know!</p>
+            
+            <div class="review-input-group">
+                <input type="text" id="clientName" placeholder="Your name">
+                <input type="email" id="clientEmail" placeholder="Your email">
+                <div class="rating-select">
+                    <label>Your Rating:</label>
+                    <select id="clientRating">
+                        <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                        <option value="4">⭐⭐⭐⭐ - Good</option>
+                        <option value="3">⭐⭐⭐ - Average</option>
+                        <option value="2">⭐⭐ - Poor</option>
+                        <option value="1">⭐ - Terrible</option>
+                    </select>
+                </div>
+                <textarea id="clientReview" rows="4" placeholder="Share your experience..."></textarea>
+                <button onclick="submitReview()">Submit Review →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <div class="newsletter">
+        <h3>📧 Get AI Tips & Exclusive Offers</h3>
+        <p>Subscribe to our newsletter for weekly AI insights and discounts.</p>
+        <input type="email" id="newsletterEmail" placeholder="Your email address">
+        <button onclick="subscribeNewsletter()">Subscribe →</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+            <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 30px;">
+                <div style="text-align: center;"><div style="font-size: 30px;">⭐</div><div style="font-weight: bold;">100% Satisfaction</div></div>
+                <div style="text-align: center;"><div style="font-size: 30px;">🚀</div><div style="font-weight: bold;">Fast Delivery</div></div>
+                <div style="text-align: center;"><div style="font-size: 30px;">💬</div><div style="font-weight: bold;">24/7 Support</div></div>
+                <div style="text-align: center;"><div style="font-size: 30px;">🔒</div><div style="font-weight: bold;">Secure Payment</div></div>
+                <div style="text-align: center;"><div style="font-size: 30px;">📋</div><div style="font-weight: bold;">15+ Projects</div></div>
+            </div>
+            <hr style="border-color: #333; margin: 20px 0;">
+            <p>🤖 AI Services Agency — Delivering AI solutions for businesses worldwide</p>
+            <p style="margin: 10px 0;">📧 ai@yoursite.com | 📱 WhatsApp: +1 234 567 890</p>
+            <div style="margin: 20px 0;">
+                <a href="#" style="color: #667eea; margin: 0 10px; text-decoration: none;">🐦 Twitter</a>
+                <a href="#" style="color: #667eea; margin: 0 10px; text-decoration: none;">💼 LinkedIn</a>
+                <a href="#" style="color: #667eea; margin: 0 10px; text-decoration: none;">📘 GitHub</a>
+            </div>
+            <p style="font-size: 12px; color: #666;">© 2024 AI Services Agency. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-button" onclick="toggleChat()">💬</div>
+        <div class="chat-popup" id="chatPopup">
+            <div class="chat-header">🤖 Chat with us</div>
+            <div class="chat-body">
+                <input type="text" id="chatName" placeholder="Your name">
+                <input type="email" id="chatEmail" placeholder="Your email">
+                <textarea id="chatMessage" rows="3" placeholder="Tell us what you need..."></textarea>
+                <button class="chat-send" onclick="sendChat()">Send Message</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Email Popup -->
+    <div id="popup" class="email-popup" style="display:none;">
+        <div class="popup-content">
+            <span onclick="closePopup()">×</span>
+            <h3>📧 Get 20% OFF!</h3>
+            <p>Subscribe for AI tips and exclusive discounts.</p>
+            <input type="email" id="popupEmail" placeholder="Your email">
+            <button onclick="subscribePopup()">Subscribe →</button>
+        </div>
+    </div>
+
+    <!-- 3D Libraries and Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        // 3D Particle Background
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: "#667eea" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#667eea", opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } }
+            }
+        });
+
+        // 3D Globe Background
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        const container = document.querySelector('.globe-container');
+        renderer.setSize(500, 500);
+        container.appendChild(renderer.domElement);
+
+        const geometry = new THREE.SphereGeometry(1, 64, 64);
+        const material = new THREE.MeshPhongMaterial({ color: 0x667eea, emissive: 0x1a1a3a, shininess: 100 });
+        const globe = new THREE.Mesh(geometry, material);
+        scene.add(globe);
+
+        const light = new THREE.AmbientLight(0x404060);
+        scene.add(light);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 10, 7);
+        scene.add(directionalLight);
+        const backLight = new THREE.PointLight(0x764ba2, 0.5);
+        backLight.position.set(-2, 1, -3);
+        scene.add(backLight);
+
+        camera.position.z = 2.2;
+
+        function animateGlobe() {
+            requestAnimationFrame(animateGlobe);
+            globe.rotation.y += 0.003;
+            globe.rotation.x += 0.001;
+            renderer.render(scene, camera);
+        }
+        animateGlobe();
+
+        // 3D Tilt Effect on Cards
+        VanillaTilt.init(document.querySelectorAll(".service-card, .case-card, .price-card"), {
+            max: 10,
+            speed: 300,
+            glare: true,
+            "max-glare": 0.2,
+            gyroscope: true,
+        });
+
+        // Scroll Animation - Fade in 3D
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.service-card, .case-card, .price-card').forEach(el => observer.observe(el));
+
+        // 3D Hero Mouse Effect
+        const hero = document.querySelector('.hero');
+        if(hero) {
+            hero.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth) * 10;
+                const y = (e.clientY / window.innerHeight) * 10;
+                hero.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${y}deg)`;
+            });
+            hero.addEventListener('mouseleave', () => {
+                hero.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
+            });
+        }
+
+        // Dark Mode Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.theme-toggle');
+            btn.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+        }
+
+        // Back to Top
+        window.addEventListener('scroll', () => {
+            const backBtn = document.querySelector('.back-to-top');
+            backBtn.classList.toggle('show', window.scrollY > 300);
+        });
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        // Chat Widget
+        function toggleChat() { document.getElementById('chatPopup').classList.toggle('active'); }
+        function sendChat() {
+            const name = document.getElementById('chatName').value;
+            const email = document.getElementById('chatEmail').value;
+            const message = document.getElementById('chatMessage').value;
+            if(name && email && message) {
+                alert(`Thank you ${name}! We'll respond within 24 hours.`);
+                document.getElementById('chatPopup').classList.remove('active');
+                document.getElementById('chatName').value = '';
+                document.getElementById('chatEmail').value = '';
+                document.getElementById('chatMessage').value = '';
+            } else { alert('Please fill all fields'); }
+        }
+
+        // FAQ
+        function toggleFAQ(element) { element.parentElement.classList.toggle('active'); }
+
+        // Newsletter
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletterEmail').value;
+            if(email) { alert(`Thanks ${email}! You'll receive AI tips weekly.`); document.getElementById('newsletterEmail').value = ''; }
+            else { alert('Please enter your email'); }
+        }
+
+        // Custom Request
+        function submitRequest() {
+            const request = document.getElementById('customRequest').value;
+            if(request) { alert(`Thanks! We'll review your request and respond within 24 hours.`); document.getElementById('customRequest').value = ''; }
+            else { alert('Please describe what you need'); }
+        }
+
+        // Calculator
+        function updatePrice() {
+            const service = parseFloat(document.getElementById('calcService').value);
+            const complexity = parseFloat(document.getElementById('calcComplexity').value);
+            const urgent = parseFloat(document.getElementById('calcUrgent').value);
+            document.getElementById('calcPrice').innerText = '$' + Math.round(service * complexity * urgent);
+        }
+        document.getElementById('calcService')?.addEventListener('change', updatePrice);
+        document.getElementById('calcComplexity')?.addEventListener('change', updatePrice);
+        document.getElementById('calcUrgent')?.addEventListener('change', updatePrice);
+        updatePrice();
+
+        // Submit Review
+        function submitReview() {
+            const name = document.getElementById('clientName').value;
+            const review = document.getElementById('clientReview').value;
+            if(name && review) { alert(`Thank you ${name}! Your review helps us grow.`); document.getElementById('clientName').value = ''; document.getElementById('clientEmail').value = ''; document.getElementById('clientReview').value = ''; }
+            else { alert('Please fill your name and review'); }
+        }
+
+        // Notifications
+        const messages = ["Someone just requested a quote! 🎉", "New client inquiry received! 📧", "Someone is viewing your portfolio 👀", "Another visitor checking your services 🔥"];
+        setInterval(() => {
+            const notif = document.getElementById('notification');
+            notif.innerText = messages[Math.floor(Math.random() * messages.length)];
+            notif.style.display = 'block';
+            setTimeout(() => notif.style.display = 'none', 3000);
+        }, 30000);
+
+        // Email Popup
+        setTimeout(() => {
+            if(!localStorage.getItem('popupShown')) {
+                document.getElementById('popup').style.display = 'flex';
+                localStorage.setItem('popupShown', 'true');
+            }
+        }, 5000);
+        function closePopup() { document.getElementById('popup').style.display = 'none'; }
+        function subscribePopup() {
+            const email = document.getElementById('popupEmail').value;
+            if(email) { alert('Thanks for subscribing!'); closePopup(); }
+        }
+
+        // AI Demo
+        document.getElementById('runDemo').addEventListener('click', () => {
+            const type = document.getElementById('demoType').value;
+            const topic = document.getElementById('demoInput').value;
+            if (!topic) { alert('Please enter a topic'); return; }
+            document.getElementById('demoOutput').innerHTML = '<div style="text-align:center;">🤖 AI is thinking...</div>';
+            setTimeout(() => {
+                let response = '';
+                if (type === 'captions') response = `📱 INSTAGRAM CAPTIONS:\n\n1. "${topic}" but make it aesthetic ✨\n2. Your daily dose of ${topic} 💪\n3. Stop scrolling, start ${topic.split(' ')[0]}ing 🚀\n4. The secret to ${topic} nobody tells you 🤫\n5. ${topic.toUpperCase()} = best decision ever 🔥`;
+                else if (type === 'script') response = `🎬 YOUTUBE SCRIPT OUTLINE:\n\nINTRO (0:00-0:30): Hook about ${topic}\nSECTION 1 (0:30-2:00): Why ${topic} matters\nSECTION 2 (2:00-4:00): Step-by-step guide\nSECTION 3 (4:00-6:00): Common mistakes\nOUTRO (6:00-7:00): Call to action`;
+                else response = `💡 VIDEO IDEAS FOR "${topic}":\n\n1. "I tried ${topic} for 30 days - here's what happened"\n2. "10 ${topic} hacks that actually work"\n3. "The dark side of ${topic}"\n4. "${topic} for beginners - complete guide"\n5. "How I make $1000 with ${topic}"`;
+                document.getElementById('demoOutput').innerHTML = `<div style="background:#1a1a3a; padding:20px; border-radius:10px; white-space:pre-wrap;">${response}</div>`;
+            }, 1000);
+        });
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('formStatus').innerHTML = 'Sending...';
+            setTimeout(() => { document.getElementById('formStatus').innerHTML = '✅ Message sent! We will contact you within 24 hours.'; document.getElementById('contactForm').reset(); }, 1000);
+        });
+    </script>
 </body>
 </html>
